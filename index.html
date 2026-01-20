@@ -3,267 +3,283 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tafadzwa Magunje | Technical Support Specialist</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Tafadzwa Magunje | Tactical Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #ec4899;      /* pink */
-      --secondary: #f472b6;    /* soft pink */
-      --accent: #fbcfe8;      /* blush */
-      --bg: #fff1f7;          /* very light pink */
-      --card: #ffffff;
-      --text: #4a044e;        /* deep plum */
-      --muted: #9d174d;
+      --bg: #020617;
+      --panel: #020617;
+      --panel-2: #020617;
+      --border: #020617;
+      --grid: rgba(56,189,248,0.08);
+      --accent: #38bdf8;   /* cyan */
+      --accent-2: #22d3ee; /* teal */
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --success: #22c55e;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(180deg, #fff1f7, #ffe4f1);
+      font-family: 'Inter', sans-serif;
+      background:
+        linear-gradient(180deg, rgba(2,6,23,0.98), rgba(2,6,23,0.98)),
+        repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 40px),
+        repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 40px);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* ---------- HEADER ---------- */
-    header {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: #fff;
-      padding: 90px 20px 100px;
-      border-bottom-left-radius: 40px;
-      border-bottom-right-radius: 40px;
-      position: relative;
+    /* ===== LAYOUT ===== */
+    .layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
     }
 
-    header::after {
-      content: "";
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 100%;
-      height: 60px;
-      background: var(--bg);
-      border-top-left-radius: 40px;
-      border-top-right-radius: 40px;
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
     }
 
-    .container { max-width: 1100px; margin: auto; }
-
-    .hero {
-      text-align: center;
-      animation: slideDown 1s ease forwards;
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      background: linear-gradient(180deg, #020617, #020617);
+      border-right: 1px solid var(--border);
+      padding: 30px 24px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
     }
 
-    .hero h1 {
-      font-size: 2.8rem;
+    .brand {
+      font-size: 1.2rem;
       font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .hero p { font-size: 1.1rem; opacity: 0.95; }
-
-    /* ---------- SECTIONS ---------- */
-    section { padding: 70px 20px; }
-
-    .card {
-      background: var(--card);
-      border-radius: 22px;
-      padding: 34px;
-      box-shadow: 0 18px 40px rgba(236,72,153,0.18);
+      letter-spacing: 0.08em;
+      color: var(--accent);
       margin-bottom: 40px;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease;
     }
 
-    .card.show {
-      opacity: 1;
-      transform: translateY(0);
+    .nav a {
+      display: block;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
     }
 
-    h2 {
+    .nav a:hover {
+      background: rgba(56,189,248,0.1);
+      color: var(--accent);
+    }
+
+    /* ===== MAIN ===== */
+    .main {
+      padding: 30px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .title h1 {
       font-size: 1.8rem;
-      margin-bottom: 18px;
-      color: var(--primary);
-    }
-
-    h3 {
-      font-size: 1.15rem;
-      margin-top: 22px;
       font-weight: 600;
-      color: #831843;
     }
 
-    .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 10px; }
+    .title p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
 
-    ul { padding-left: 18px; margin-top: 10px; }
-    li { margin-bottom: 10px; }
-
-    /* ---------- SKILLS ---------- */
+    /* ===== PANELS ===== */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
     }
 
-    .skills li {
-      list-style: none;
-      background: linear-gradient(135deg, #ffe4f1, #fbcfe8);
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #831843;
-      box-shadow: 0 8px 18px rgba(236,72,153,0.15);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .panel {
+      background: linear-gradient(180deg, #020617, #020617);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+      animation: rise 0.8s ease forwards;
     }
 
-    .skills li:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 14px 30px rgba(236,72,153,0.25);
+    .panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 60%, rgba(56,189,248,0.12));
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    /* ---------- CONTACT ---------- */
-    .contact a {
-      color: var(--primary);
+    .panel:hover::after { opacity: 1; }
+
+    .panel h2 {
+      font-size: 1.1rem;
       font-weight: 600;
-      text-decoration: none;
+      margin-bottom: 14px;
+      color: var(--accent);
+      letter-spacing: 0.04em;
     }
 
-    /* ---------- FOOTER ---------- */
-    footer {
-      text-align: center;
-      padding: 40px 20px;
+    .panel p {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    /* ===== DATA LIST ===== */
+    ul { list-style: none; margin-top: 12px; }
+    li {
+      padding: 8px 0;
       font-size: 0.9rem;
       color: var(--muted);
-      animation: fadeIn 1.2s ease forwards;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed rgba(148,163,184,0.15);
     }
 
-    /* ---------- ANIMATIONS ---------- */
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-30px); }
+    li span { color: var(--text); }
+
+    /* ===== SKILL TAGS ===== */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      border: 1px solid rgba(56,189,248,0.4);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== STATUS ===== */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      margin-top: 10px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--success);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* ---------- RESPONSIVE ---------- */
     @media (max-width: 600px) {
-      .hero h1 { font-size: 2.2rem; }
-      h2 { font-size: 1.5rem; }
-      section { padding: 55px 16px; }
-      .card { padding: 26px; }
+      .main { padding: 20px; }
+      .title h1 { font-size: 1.5rem; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="container hero">
-    <h1>Tafadzwa Magunje</h1>
-    <p>Technical Support Specialist · Customer Service Professional</p>
-    <p class="meta">Kuala Lumpur, Malaysia</p>
-  </div>
-</header>
+<div class="layout">
 
-<section>
-  <div class="container">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">TAFADZWA MAGUNJE</div>
+    <nav class="nav">
+      <a href="#">Overview</a>
+      <a href="#">Experience</a>
+      <a href="#">Skills</a>
+      <a href="#">Education</a>
+      <a href="#">Contact</a>
+    </nav>
+  </aside>
 
-    <div class="card">
-      <h2>About Me</h2>
-      <p>
-        Technical Support Specialist with over one year of experience providing friendly, reliable,
-        and efficient support. I enjoy solving problems, helping users feel confident with technology,
-        and continuously improving my skills.
-      </p>
-    </div>
+  <!-- MAIN -->
+  <main class="main">
 
-    <div class="card">
-      <h2>Professional Experience</h2>
-
-      <h3>Advisor 1 – Customer Service</h3>
-      <p class="meta">Concentrix Malaysia · Jul 2023 – Present</p>
-      <ul>
-        <li>Troubleshoot hardware, software, and network issues</li>
-        <li>Provide technical support via phone, email, and chat</li>
-        <li>Document incidents and solutions</li>
-        <li>Assist users remotely using secure tools</li>
-        <li>Monitor systems and maintain security standards</li>
-      </ul>
-
-      <h3>Business Developer Executive (Part-Time)</h3>
-      <p class="meta">Vrundaz Technology · Apr 2022 – May 2022</p>
-      <ul>
-        <li>Handled sales outreach and marketing</li>
-        <li>Managed leads and email communication</li>
-      </ul>
-
-      <h3>Business Developer Executive</h3>
-      <p class="meta">Parul University, India · Nov 2022 – May 2023</p>
-      <ul>
-        <li>Provided remote technical support to students</li>
-        <li>Managed admissions and documentation</li>
-      </ul>
-
-      <h3>Customer Service Support</h3>
-      <p class="meta">Arctic Systems Zimbabwe · Feb 2020 – Aug 2020</p>
-      <ul>
-        <li>Handled customer queries and issue tracking</li>
-        <li>Provided remote support via AnyDesk & TeamViewer</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>Education</h2>
-      <p><strong>Bachelor of Business Management (Finance)</strong></p>
-      <p class="meta">Parul University, India · First Class · 2020 – 2023</p>
-      <p><strong>Advanced Level</strong> – Chikangwe High School (7 Points)</p>
-    </div>
-
-    <div class="card">
-      <h2>Skills</h2>
-      <div class="grid skills">
-        <li>Technical Troubleshooting</li>
-        <li>Remote Support Tools</li>
-        <li>Incident Management</li>
-        <li>System Maintenance</li>
-        <li>MS Word, Excel & PowerPoint</li>
-        <li>Customer Communication</li>
-        <li>Quick Learner</li>
-        <li>Self-Motivated</li>
+    <div class="topbar">
+      <div class="title">
+        <h1>Tafadzwa Magunje</h1>
+        <p>Technical Support Specialist · Kuala Lumpur</p>
       </div>
     </div>
 
-    <div class="card contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:magunjetafadzwa@gmail.com">magunjetafadzwa@gmail.com</a></p>
-      <p>Phone: +60 11 5424 0751</p>
+    <div class="grid">
+
+      <div class="panel">
+        <h2>PROFILE</h2>
+        <p>
+          Technical Support Specialist with strong troubleshooting capabilities,
+          incident handling experience, and a focus on system reliability and
+          user satisfaction.
+        </p>
+        <div class="status"><div class="dot"></div>ACTIVE</div>
+      </div>
+
+      <div class="panel">
+        <h2>EXPERIENCE</h2>
+        <ul>
+          <li>Concentrix <span>2023–Present</span></li>
+          <li>Parul University <span>2022–2023</span></li>
+          <li>Vrundaz Tech <span>2022</span></li>
+          <li>Arctic Systems <span>2020</span></li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h2>SKILL SET</h2>
+        <div class="tags">
+          <div class="tag">TROUBLESHOOTING</div>
+          <div class="tag">REMOTE SUPPORT</div>
+          <div class="tag">INCIDENT MGMT</div>
+          <div class="tag">MS OFFICE</div>
+          <div class="tag">CUSTOMER CARE</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>EDUCATION</h2>
+        <ul>
+          <li>BBA Finance <span>First Class</span></li>
+          <li>Advanced Level <span>7 Points</span></li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h2>CONTACT</h2>
+        <ul>
+          <li>Email <span>magunjetafadzwa@gmail.com</span></li>
+          <li>Phone <span>+60 11 5424 0751</span></li>
+          <li>Status <span>Available</span></li>
+        </ul>
+      </div>
+
     </div>
 
-  </div>
-</section>
+  </main>
 
-<footer>
-  © 2026 Tafadzwa Magunje. All rights reserved.
-</footer>
-
-<script>
-  // Fade-in on scroll
-  const cards = document.querySelectorAll('.card');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      }
-    });
-  }, { threshold: 0.15 });
-
-  cards.forEach(card => observer.observe(card));
-</script>
+</div>
 
 </body>
 </html>
